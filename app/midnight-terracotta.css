@@ -182,3 +182,32 @@ body{background:#201b21;color:#f6e9e1}
 @media(prefers-reduced-motion:reduce){
  .nx-site-feature-card,.nx-ws-stat,.nx-ws-project-card{transition:none}
 }
+
+/* Final usability polish: keyboard focus, tablet navigation, subtle micro-interactions. */
+.nx-site :is(a,button):focus-visible,.nx-preview button:focus-visible,.nx-ws button:focus-visible,.nx-ws input:focus-visible,.nx-ws select:focus-visible{
+ outline:2px solid #ffc1a3;outline-offset:3px;
+}
+.nx-preview-navigation button,.nx-preview-periods button,.nx-preview-week button,.nx-preview-all,.nx-ws-nav button,.nx-ws-calendar-grid button{
+ transition:background .18s ease,color .18s ease,transform .18s ease;
+}
+.nx-preview-kpi,.nx-preview-project,.nx-ws-stat{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.nx-preview-kpi:hover{transform:translateY(-3px);border-color:#be8779a3;box-shadow:0 14px 24px #0e0b134d}
+.nx-preview-hero-bottom button:hover,.nx-preview-all:hover{filter:brightness(1.16)}
+.nx-site-secondary:hover{color:#ffa98f!important}
+.nx-ws .nx-ws-hero{background:linear-gradient(110deg,var(--nx-accent),#b05257 72%,#953f4d)}
+.nx-ws .nx-ws-progress-ring:before{background:#b35559}
+::selection{background:#eaa088;color:#24181f}
+@media(min-width:681px) and (max-width:960px){
+ .nx-ws-sidebar{flex-basis:193px;padding-inline:10px}
+ .nx-ws-sidebar .nx-ws-brand{margin:0 4px 40px}
+ .nx-ws-sidebar .nx-ws-brand>span:nth-child(2){display:block;font-size:17px}
+ .nx-ws-sidebar .nx-ws-side-caption{display:block;font-size:8px}
+ .nx-ws-sidebar .nx-ws-nav button,.nx-ws-sidebar .nx-ws-nav button:not(.active){
+  display:flex;justify-content:flex-start;font-size:11px;padding:11px 9px
+ }
+ .nx-ws-sidebar .nx-ws-help{display:grid;padding:13px}
+ .nx-ws-sidebar .nx-ws-account p{display:block}
+ .nx-ws-sidebar .nx-ws-account>svg{display:block}
+ .nx-ws-hero-layout{grid-template-columns:1fr}
+ .nx-ws-hero-visual{right:7%}
+}
