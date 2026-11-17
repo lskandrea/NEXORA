@@ -1,0 +1,51 @@
+/* NEXORA — warm editorial workspace redesign */
+:root{color-scheme:light;background:#f8f4f0;color:#372923;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+body{background:#f8f4f0;color:#372923}p{color:#978a82}
+.shell{background:#f8f4f0;min-height:100vh;color:#382923}
+.sidebar{background:linear-gradient(165deg,#a85c4e 0%,#9e4f46 55%,#85423d 100%);border:0;width:264px;padding:32px 20px;box-shadow:12px 0 38px #693c3010;color:#fff}
+.sidebar .brand,.brandmark{color:#fff!important}.sidebar .brand{font-size:23px;letter-spacing:-.035em;margin-bottom:50px}
+.sideheading{color:#edc7bb;font-size:10px;letter-spacing:.16em}
+.navlinks{gap:8px}.navlinks button{color:#f5dbd1;font-weight:600;border-radius:12px;padding:14px 16px}
+.navlinks button:hover{background:#ffffff22;color:#fff;transform:none}
+.navlinks .navactive{background:#fff0e9!important;color:#9b4c43!important;box-shadow:0 7px 18px #6c32262e}
+.sidebar-promo{background:#ffffff15;border:1px solid #ffffff38;color:#fff}.sidebar-promo b,.sidebar-promo small{color:#fff}
+.sidebottom{border-top-color:#ffffff50;color:#fff}.sidebottom .textbutton{color:#ffe5d6}
+.profile .avatar{background:#f9d5c6;color:#914d42}
+.content{background:#f8f4f0;max-width:none;padding:38px clamp(24px,4vw,72px) 90px}
+.topline{color:#ae9b90;margin-bottom:45px}.crumb{color:#c66b57}.live{color:#8c837b}.live-dot,.workspace-dot{background:#72b69c;box-shadow:none}
+.dashheader{margin-bottom:30px}.dashheader .eyebrow{color:#c36e5c;font-size:11px}.dashheader h1{font-size:clamp(34px,3.4vw,52px);font-weight:750;color:#392a25;letter-spacing:-.055em}
+.dashheader p{color:#99877c;font-size:15px}.headeravatar{background:#e6b9a7;border:2px solid white;color:#7f403a;border-radius:50%;box-shadow:0 6px 18px #b56c5020}
+.workspacebar{background:#fffaf7;border:1px solid #eedfd5;border-radius:14px;color:#57443b;box-shadow:0 8px 25px #7b47300a;padding:14px 18px}
+.pill{background:#fce5db;color:#ae614e}
+.searchrow{background:#fff;border:1px solid #f0e4dc;color:#bc9f90;box-shadow:0 8px 18px #a16d4b0a}
+.searchrow input{color:#48372e}.searchrow input::placeholder{color:#b7a69d}
+.panel,.stat{background:#fffdfa;border:1px solid #f0e4da;border-radius:21px;box-shadow:0 12px 34px #ae795116}
+.panel:hover,.stat:hover{border-color:#e6c8b9}
+.stats{gap:20px;margin-bottom:24px}.stat{min-height:185px;padding:25px 28px;gap:10px}
+.stat:nth-child(2){background:#fff0e7}.stat:nth-child(3){background:#f8e6dc}
+.stat span{color:#927f74;font-size:13px;font-weight:650}.stat span svg{color:#c77864}
+.stat strong{color:#402c25;font-size:52px;font-weight:760;line-height:1.1}.stat small{color:#a18b7f}
+.progresspanel{background:linear-gradient(120deg,#fff1e8,#f7ded2);border:1px solid #eed2c5;padding:30px;margin-bottom:24px}
+.progresspanel .eyebrow{color:#b96e5a}.progresspanel h2,.sectiontitle h2,.panel h2{color:#49332a}
+.progresspanel p{color:#a08072}.progressnumber{color:#b96350}.progressbar{background:#e9cfc1;height:10px}.progressbar span{background:linear-gradient(90deg,#d9775c,#b95449)}
+.sectiontitle button,.count{color:#bf6c55}.item{background:#fff8f4;border:1px solid #f2e6df;color:#59483f;border-radius:13px}
+.item:hover{background:#fff0e9}.status{background:#f5e5dc;color:#aa715d}.projecticon{background:#f9e0d5;color:#b96652}
+.inlineform input,.taskform input,.taskform select,.authcard input{background:#fffaf6;color:#44342b;border:1px solid #e8d7cc}
+.button{background:#b75f4e;color:#fff;border-radius:11px;box-shadow:0 6px 13px #b75f4e25}
+.button:hover{background:#9c4b41}.button.outline{background:#f9e4db;color:#994e42;border:1px solid #eac8b8}
+.billing{background:#fff9f4}.billing small{color:#9d897d}
+.auth{background:radial-gradient(circle at 75% 15%,#f2d3c4,transparent 46%),#f8f4f0}
+.authcard{background:#fffdfa;border:1px solid #efded3;box-shadow:0 22px 80px #aa76542b;color:#3e2b25}
+.authcard .brand{color:#b95d4b}.authcard h1{color:#3d2b25}.authcard p{color:#98877b}
+.authcard .textbutton{color:#b35c4d}
+.landing{color:#443129}.landing .brand{color:#a85145}.landing .hero{background:radial-gradient(ellipse at 75% 35%,#f7d3c3,transparent 55%)}
+.landing .hero h1 em{color:#b65c4d}.landing .feature{background:#fffaf6;border-color:#eddbd0}.landing .feature span{color:#b65c4d}
+.landing .pricing h2{color:#443129}
+.activity-card{padding:27px 30px 22px;margin-bottom:24px;background:#fffdfa;border:1px solid #efdfd4;border-radius:22px;box-shadow:0 12px 34px #ae795116}
+.activity-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.activity-head h2{font-size:20px;color:#483228;margin:0}.activity-head span{font-size:12px;color:#b47d6d;background:#f9ece5;padding:8px 12px;border-radius:10px}
+.activity-chart{display:flex;align-items:end;gap:10px;height:180px;margin-top:25px;padding:0 8px 12px;border-bottom:1px solid #eadbd1}
+.activity-chart .bar{flex:1;min-width:7px;background:linear-gradient(180deg,#cc806c,#f1c4b3);border-radius:7px 7px 2px 2px;opacity:.94;transition:height .35s ease}
+.activity-chart .bar:nth-child(3n){background:linear-gradient(180deg,#a85148,#dc9581)}
+.activity-labels{display:flex;justify-content:space-between;color:#aa9689;font-size:11px;margin:12px 6px 0}
+@media(max-width:900px){.sidebar{width:225px}.content{padding:25px}.stats{gap:12px}.stat{padding:20px}}
+@media(max-width:650px){.shell{flex-direction:column}.sidebar{width:100%;padding:15px}.sidebar .brand{margin:0}.navlinks{width:100%;overflow-x:auto}.navlinks button{padding:10px}.content{padding:22px 15px}.stats{grid-template-columns:1fr}.columns{grid-template-columns:1fr}.activity-chart{gap:5px}.topline{margin-bottom:20px}}
