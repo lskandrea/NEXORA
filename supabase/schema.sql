@@ -1,0 +1,22 @@
+-- Run in Supabase SQL Editor. Requires Supabase Auth.
+create extension if not exists pgcrypto;
+create table public.workspaces (id uuid primary key default gen_random_uuid(),name text not null check(char_length(name)<=80),plan text not null default 'free' check(plan in ('free','pro','business')),stripe_customer_id text unique,stripe_subscription_id text,created_at timestamptz not null default now());
+create table public.workspace_members (workspace_id uuid not null references public.workspaces(id) on delete cascade,user_id uuid not null references auth.users(id) on delete cascade,role text not null check(role in ('owner','admin','member')),primary key(workspace_id,user_id));
+create table public.projects (id uuid primary key default gen_random_uuid(),workspace_id uuid not null references public.workspaces(id) on delete cascade,name text not null check(char_length(name)<=120),status text not null default 'active' check(status in ('active','archived')),created_by uuid not null references auth.users(id),created_at timestamptz not null default now());
+create table public.tasks (id uuid primary key default gen_random_uuid(),project_id uuid not null references public.projects(id) on delete cascade,title text not null check(char_length(title)<=160),status text not null default 'todo' check(status in ('todo','in_progress','done')),created_by uuid not null references auth.users(id),created_at timestamptz not null default now());
+create index on public.workspace_members(user_id);create index on public.projects(workspace_id);create index on public.tasks(project_id);
+alter table public.workspaces enable row level security;alter table public.workspace_members enable row level security;alter table public.projects enable row level security;alter table public.tasks enable row level security;
+-- Security-definer helper avoids recursive membership policies.
+create function public.is_workspace_member(wid uuid) returns boolean language sql stable security definer set search_path='' as $$select exists(select 1 from public.workspace_members where workspace_id=wid and user_id=(select auth.uid()))$$;
+create function public.is_workspace_owner(wid uuid) returns boolean language sql stable security definer set search_path='' as $$select exists(select 1 from public.workspace_members where workspace_id=wid and user_id=(select auth.uid()) and role='owner')$$;
+create policy "members see workspace" on public.workspaces for select to authenticated using(public.is_workspace_member(id));
+create policy "members see membership" on public.workspace_members for select to authenticated using(public.is_workspace_member(workspace_id));
+create policy "members see projects" on public.projects for select to authenticated using(public.is_workspace_member(workspace_id));
+create policy "members create projects" on public.projects for insert to authenticated with check(public.is_workspace_member(workspace_id) and created_by=(select auth.uid()));
+create policy "members see tasks" on public.tasks for select to authenticated using(exists(select 1 from public.projects p where p.id=project_id and public.is_workspace_member(p.workspace_id)));
+create policy "members create tasks" on public.tasks for insert to authenticated with check(created_by=(select auth.uid()) and exists(select 1 from public.projects p where p.id=project_id and public.is_workspace_member(p.workspace_id)));
+-- Atomic workspace creation; execute privilege restricted to authenticated.
+create function public.create_workspace(workspace_name text) returns uuid language plpgsql security definer set search_path='' as $$declare wid uuid;begin if auth.uid() is null or workspace_name is null or length(trim(workspace_name))=0 or length(workspace_name)>80 then raise exception 'Invalid workspace';end if;insert into public.workspaces(name) values(trim(workspace_name)) returning id into wid;insert into public.workspace_members(workspace_id,user_id,role) values(wid,auth.uid(),'owner');return wid;end$$;
+revoke all on function public.create_workspace(text) from public;grant execute on function public.create_workspace(text) to authenticated;
+revoke all on function public.is_workspace_member(uuid) from public;grant execute on function public.is_workspace_member(uuid) to authenticated;
+revoke all on function public.is_workspace_owner(uuid) from public;grant execute on function public.is_workspace_owner(uuid) to authenticated;
